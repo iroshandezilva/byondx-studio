@@ -1,6 +1,5 @@
 "use client";
 
-import { Ticker } from "motion-plus/react";
 import Image from "next/image";
 
 const clientLogos = [
@@ -23,22 +22,32 @@ function LogoTile({ logo }: { logo: (typeof clientLogos)[number] }) {
   );
 }
 
+function TickerRow({
+  logos,
+  reverse = false,
+}: {
+  logos: typeof clientLogos;
+  reverse?: boolean;
+}) {
+  const items = [...logos, ...logos];
+  return (
+    <div className="overflow-hidden">
+      <div
+        className={`flex gap-[6px] w-max ${reverse ? "animate-ticker-reverse" : "animate-ticker"}`}
+      >
+        {items.map((logo, i) => (
+          <LogoTile key={`${logo.name}-${i}`} logo={logo} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function ClientLogosTicker() {
   return (
     <div className="relative flex flex-col gap-[6px] overflow-hidden">
-      <Ticker
-        items={row1.map((logo) => (
-          <LogoTile key={logo.name} logo={logo} />
-        ))}
-        className="flex gap-[6px]"
-      />
-      <Ticker
-        items={row2.map((logo) => (
-          <LogoTile key={logo.name} logo={logo} />
-        ))}
-        direction={-1}
-        className="flex gap-[6px]"
-      />
+      <TickerRow logos={row1} />
+      <TickerRow logos={row2} reverse />
       {/* Left fade */}
       <div
         className="pointer-events-none absolute inset-y-0 left-0 w-10 z-10"
