@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "motion/react";
+import { LazyMotion, domAnimation, m, AnimatePresence } from "motion/react";
 import Image from "next/image";
 
 type TeamMember = {
@@ -17,27 +17,38 @@ type TeamMember = {
 
 const team: TeamMember[] = [
   {
-    name: "Iroshan Dezilva",
-    role: "Design Lead",
-    avatar: "/images/photos/iroshan.png",
+    name: "Iroshan De Zilva",
+    role: "Lead Designer",
+    avatar: "/images/photos/iroshan.webp",
     initials: "ID",
     color: "#E8F0E8",
     linkedin: "https://linkedin.com/in/iroshan",
     twitter: "https://twitter.com/iroshan",
   },
   {
-    name: "Team Member",
-    role: "Senior Designer",
-    initials: "TM",
+    name: "Thinuka De Mel",
+    role: "Creative Designer",
+    avatar: "/images/photos/thinuka.webp",
+    initials: "TD",
     color: "#E8E8F0",
     linkedin: "#",
     twitter: "#",
   },
   {
-    name: "Team Member",
-    role: "UI Designer",
-    initials: "TM",
+    name: "Minindu Thiranjaya",
+    role: "Product Designer",
+    avatar: "/images/photos/minindu.webp",
+    initials: "MT",
     color: "#F0E8E8",
+    linkedin: "#",
+    twitter: "#",
+  },
+  {
+    name: "Sandaruwan Ranathunga",
+    role: "Product Designer",
+    avatar: "/images/photos/sandaruwan.webp",
+    initials: "SR",
+    color: "#EEF0E8",
     linkedin: "#",
     twitter: "#",
   },
@@ -93,7 +104,7 @@ function Avatar({ member, zIndex }: { member: TeamMember; zIndex: number }) {
             pointerEvents: "auto",
           }}
         >
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 4, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 4, scale: 0.95 }}
@@ -135,13 +146,14 @@ function Avatar({ member, zIndex }: { member: TeamMember; zIndex: number }) {
             </div>
             {/* Arrow */}
             <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-t-[5px] border-t-white" />
-          </motion.div>
+          </m.div>
         </div>
       )}
     </AnimatePresence>
   );
 
   return (
+    <LazyMotion features={domAnimation}>
     <div
       ref={triggerRef}
       className="relative"
@@ -151,7 +163,7 @@ function Avatar({ member, zIndex }: { member: TeamMember; zIndex: number }) {
     >
       {typeof document !== "undefined" && createPortal(tooltip, document.body)}
 
-      <motion.div
+      <m.div
         animate={{ y: open ? -4 : 0 }}
         transition={{ type: "spring", stiffness: 300, damping: 17 }}
         className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-white shadow-[0px_2px_4px_rgba(0,0,0,0.08)]"
@@ -172,8 +184,9 @@ function Avatar({ member, zIndex }: { member: TeamMember; zIndex: number }) {
             </span>
           </div>
         )}
-      </motion.div>
+      </m.div>
     </div>
+    </LazyMotion>
   );
 }
 
@@ -185,7 +198,7 @@ export function TeamAvatars() {
       </span>
       <div className="flex items-center -space-x-2">
         {team.map((member, i) => (
-          <Avatar key={i} member={member} zIndex={team.length - i} />
+          <Avatar key={member.name} member={member} zIndex={team.length - i} />
         ))}
       </div>
     </div>

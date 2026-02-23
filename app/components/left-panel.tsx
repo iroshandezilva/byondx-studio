@@ -80,7 +80,7 @@ const bulletPoints = [
 
 export function LeftPanel() {
   return (
-    <aside className="w-full lg:max-w-[480px] shrink-0 lg:sticky lg:top-0 lg:h-dvh lg:overflow-y-auto scrollbar-hide flex flex-col gap-6 pt-6 pr-6 pb-4">
+    <aside className="w-full lg:max-w-[600px] shrink-0 lg:sticky lg:top-0 lg:h-dvh lg:overflow-y-auto scrollbar-hide flex flex-col gap-6 pt-6 px-6 pb-4">
       {/* Top section: Logo + Heading + CTA */}
       <div className="flex flex-col gap-5 pb-5">
         {/* Logo */}
@@ -90,7 +90,7 @@ export function LeftPanel() {
 
         {/* Heading + Subtext */}
         <div className="flex flex-col gap-3">
-          <h1 className="text-[32px] font-semibold leading-[40px] tracking-[-1.28px] text-black">
+          <h1 className="text-[32px] font-semibold leading-[40px] tracking-[-1.28px] text-black" style={{ fontFamily: "var(--font-ibm-plex-serif), Georgia, serif" }}>
             A design studio that becomes part of your team.
           </h1>
           <p className="text-[14px] leading-[20.3px] text-black opacity-60">
@@ -108,7 +108,6 @@ export function LeftPanel() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-accent-green h-[44px] px-4 rounded-xl shadow-[0px_1px_2px_0.5px_rgba(0,0,0,0.03),0px_1.5px_5px_0px_rgba(0,0,0,0.06)] ring-[1.5px] ring-inset ring-black/6 transition-all duration-150 hover:brightness-95 hover:shadow-[0px_2px_4px_1px_rgba(0,0,0,0.06),0px_3px_8px_0px_rgba(0,0,0,0.10)] hover:scale-[1.02] active:scale-[0.98]"
           >
-            <CalComIcon />
             <span className="text-[14px] font-semibold tracking-[-0.56px] text-black">
               Schedule a call
             </span>
@@ -132,7 +131,7 @@ export function LeftPanel() {
                 <div className="-rotate-[18deg]">
                   <div className="w-8 h-8 rounded-full overflow-hidden shadow-[0px_5px_3px_0px_rgba(0,0,0,0.01),0px_2px_2px_0px_rgba(0,0,0,0.02),0px_1px_1px_0px_rgba(0,0,0,0.03)] ring-3 ring-white">
                     <Image
-                      src="/images/photos/iroshan.png"
+                      src="/images/photos/iroshan.webp"
                       alt="Iroshan"
                       width={32}
                       height={32}
@@ -141,18 +140,9 @@ export function LeftPanel() {
                   </div>
                 </div>
               </div>
-              {/* BYONDX small logo */}
-              <div className="absolute right-[9px] top-[14px] w-6 h-6 rounded-full bg-white shadow-sm flex items-center justify-center">
-                <Image
-                  src="/images/icons/byondx-small.svg"
-                  alt=""
-                  width={22}
-                  height={23}
-                />
-              </div>
             </div>
             {/* Talk to text */}
-            <div className="absolute bottom-0 left-0 opacity-40">
+            <div className="absolute bottom-[12px] left-[20px] opacity-40">
               <span className="font-hand text-[12px] text-black leading-[14.4px] whitespace-nowrap">
                 TALK TO IROSHAN
               </span>
@@ -161,7 +151,7 @@ export function LeftPanel() {
         </div>
 
         {/* Bullet Points */}
-        <div className="flex flex-col gap-3 mt-14">
+        <div className="flex flex-col gap-3 mt-6">
           <span className="font-mono text-[12px] text-accent-orange leading-[15px]">
             • Work with us
           </span>
@@ -188,7 +178,7 @@ export function LeftPanel() {
       <div className="flex flex-col gap-1.5 w-full">
         {/* Client Logos */}
         <div className="flex flex-col gap-3">
-          <span className="font-mono text-[12px] text-accent-orange leading-[15px]">
+          <span className="font-mono text-[12px] leading-[15px]" style={{ color: "#25241F" }}>
             • Happy clients
           </span>
           <ClientLogosTicker />
