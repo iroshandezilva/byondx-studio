@@ -26,7 +26,9 @@ export function Footer() {
 
           {/* CTA Button */}
           <a
-            href="#"
+            href="https://cal.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2.5 bg-[#f5f5f5] px-6 py-5 rounded-full border border-[#cd5b2a] shadow-[inset_0px_-5px_10px_0px_#f68554]"
           >
             <Image
@@ -51,6 +53,7 @@ export function Footer() {
             alt=""
             fill
             className="object-cover"
+            sizes="100vw"
           />
         </div>
       </section>
@@ -65,8 +68,8 @@ export function Footer() {
         {/* Center Logo */}
         <div className="flex-1 flex items-center justify-center">
           <Image
-            src="/images/logos/seedesign-footer.svg"
-            alt="SeeDesign"
+            src="/images/logos/byondx-v1.svg"
+            alt="BYONDX"
             width={211}
             height={33}
           />
