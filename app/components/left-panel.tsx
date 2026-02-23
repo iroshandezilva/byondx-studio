@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { TestimonialCarousel } from "./testimonial-carousel";
+import { TeamAvatars } from "./team-avatars";
+import { ClientLogosTicker } from "./client-logos-ticker";
 
 function ByondxLogo() {
   return (
@@ -38,63 +39,22 @@ function ByondxLogo() {
   );
 }
 
-function GoogleMeetIcon() {
+function CalComIcon() {
   return (
     <svg
-      width="12"
-      height="10"
-      viewBox="0 0 12 10"
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clipPath="url(#clip0_307_14325)">
-        <mask
-          id="mask0_307_14325"
-          style={{ maskType: "luminance" }}
-          maskUnits="userSpaceOnUse"
-          x="0"
-          y="0"
-          width="12"
-          height="10"
-        >
-          <path d="M12 0H0V9.89062H12V0Z" fill="white" />
-        </mask>
-        <g mask="url(#mask0_307_14325)">
-          <path
-            d="M6.78906 4.93697L7.9589 6.27417L9.53213 7.27942L9.80577 4.94541L9.53213 2.66406L7.92878 3.54712L6.78906 4.93697Z"
-            fill="#00832D"
-          />
-          <path
-            d="M0 7.06224V9.05116C0 9.5053 0.368592 9.87398 0.822826 9.87398H2.81174L3.22359 8.37124L2.81174 7.06224L1.44721 6.65039L0 7.06224Z"
-            fill="#0066DA"
-          />
-          <path
-            d="M2.81174 0L0 2.81174L1.4473 3.22263L2.81174 2.81174L3.2161 1.52058L2.81174 0Z"
-            fill="#E94235"
-          />
-          <path
-            d="M0 7.06388H2.81174V2.8125H0V7.06388Z"
-            fill="#2684FC"
-          />
-          <path
-            d="M11.3274 1.19011L9.53125 2.66369V7.27897L11.3349 8.75829C11.6049 8.96979 11.9998 8.77701 11.9998 8.43383V1.50796C11.9998 1.16095 11.5955 0.969131 11.3274 1.19011Z"
-            fill="#00AC47"
-          />
-          <path
-            d="M6.78928 4.9375V7.06271H2.8125V9.87445H8.70953C9.16376 9.87445 9.53235 9.50578 9.53235 9.05163V7.27995L6.78928 4.9375Z"
-            fill="#00AC47"
-          />
-          <path
-            d="M8.70953 0H2.8125V2.81174H6.78928V4.93695L9.53235 2.66404V0.822825C9.53235 0.368592 9.16376 0 8.70953 0Z"
-            fill="#FFBA00"
-          />
-        </g>
-      </g>
-      <defs>
-        <clipPath id="clip0_307_14325">
-          <rect width="12" height="10" fill="white" />
-        </clipPath>
-      </defs>
+      <rect x="0.5" y="0.5" width="13" height="13" rx="3.5" stroke="black" strokeOpacity="0.2" />
+      <rect x="2" y="2" width="10" height="10" rx="2.5" fill="black" fillOpacity="0.06" />
+      <path d="M4 5.5H10" stroke="black" strokeWidth="1.2" strokeLinecap="round" />
+      <path d="M4 7.5H8" stroke="black" strokeWidth="1.2" strokeLinecap="round" />
+      <path d="M4 9.5H6" stroke="black" strokeWidth="1.2" strokeLinecap="round" />
+      <rect x="5" y="1" width="1.2" height="2.5" rx="0.6" fill="black" fillOpacity="0.4" />
+      <rect x="7.8" y="1" width="1.2" height="2.5" rx="0.6" fill="black" fillOpacity="0.4" />
     </svg>
   );
 }
@@ -117,18 +77,10 @@ const bulletPoints = [
   },
 ];
 
-const clientLogos = [
-  { name: "Nextiva", src: "/images/logos/nextiva.svg", w: 50, h: 14 },
-  { name: "Aura", src: "/images/logos/aura.svg", w: 45, h: 14 },
-  { name: "TestRail", src: "/images/logos/testrail.svg", w: 54, h: 14 },
-  { name: "Teramind", src: "/images/logos/teramind.svg", w: 74, h: 20 },
-  { name: "Netic", src: "/images/logos/netic.svg", w: 47, h: 14 },
-  { name: "Owner", src: "/images/logos/owner.png", w: 60, h: 14 },
-];
 
 export function LeftPanel() {
   return (
-    <aside className="w-full lg:w-[320px] shrink-0 lg:sticky lg:top-0 lg:h-dvh lg:overflow-y-auto scrollbar-hide flex flex-col gap-6 pt-6 pr-6 pb-4">
+    <aside className="w-full lg:max-w-[480px] shrink-0 lg:sticky lg:top-0 lg:h-dvh lg:overflow-y-auto scrollbar-hide flex flex-col gap-6 pt-6 pr-6 pb-4">
       {/* Top section: Logo + Heading + CTA */}
       <div className="flex flex-col gap-5 pb-5">
         {/* Logo */}
@@ -139,24 +91,26 @@ export function LeftPanel() {
         {/* Heading + Subtext */}
         <div className="flex flex-col gap-3">
           <h1 className="text-[32px] font-semibold leading-[40px] tracking-[-1.28px] text-black">
-            World-class design for fast-growing startups.
+            A design studio that becomes part of your team.
           </h1>
           <p className="text-[14px] leading-[20.3px] text-black opacity-60">
-            Senior team that shaped the look of global startups and
-            billion-dollar companies. Fast delivery and high-quality work — all
-            with simple monthly pricing.
+            A focused studio of four. We embed with your team, think like
+            owners, and ship work that moves metrics — not just looks good in a
+            portfolio.
           </p>
         </div>
 
         {/* CTA Button + Arrow + Profile */}
         <div className="relative">
           <a
-            href="#"
-            className="inline-flex items-center gap-2 bg-accent-green h-[44px] px-4 rounded-xl shadow-[0px_1px_2px_0.5px_rgba(0,0,0,0.03),0px_1.5px_5px_0px_rgba(0,0,0,0.06)] ring-[1.5px] ring-inset ring-black/6"
+            href="https://cal.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-accent-green h-[44px] px-4 rounded-xl shadow-[0px_1px_2px_0.5px_rgba(0,0,0,0.03),0px_1.5px_5px_0px_rgba(0,0,0,0.06)] ring-[1.5px] ring-inset ring-black/6 transition-all duration-150 hover:brightness-95 hover:shadow-[0px_2px_4px_1px_rgba(0,0,0,0.06),0px_3px_8px_0px_rgba(0,0,0,0.10)] hover:scale-[1.02] active:scale-[0.98]"
           >
-            <GoogleMeetIcon />
+            <CalComIcon />
             <span className="text-[14px] font-semibold tracking-[-0.56px] text-black">
-              Schedule your call
+              Schedule a call
             </span>
           </a>
 
@@ -237,25 +191,11 @@ export function LeftPanel() {
           <span className="font-mono text-[12px] text-accent-orange leading-[15px]">
             • Happy clients
           </span>
-          <div className="grid grid-cols-2 gap-[6px] h-[160px]">
-            {clientLogos.map((logo) => (
-              <div
-                key={logo.name}
-                className="bg-white rounded-[10px] flex items-center justify-center"
-              >
-                <Image
-                  src={logo.src}
-                  alt={logo.name}
-                  width={logo.w}
-                  height={logo.h}
-                />
-              </div>
-            ))}
-          </div>
+          <ClientLogosTicker />
         </div>
 
-        {/* Testimonial */}
-        <TestimonialCarousel />
+        {/* Team Avatars */}
+        <TeamAvatars />
       </div>
     </aside>
   );

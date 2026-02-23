@@ -13,18 +13,18 @@ const projects = [
     src: "/images/showcase/feelo-onboarding.png",
     alt: "Feelo Onboarding",
   },
+  {
+    src: "/images/showcase/payable-thumbnail.webp",
+    alt: "Payable Thumbnail",
+  },
 ];
 
 export function RightPanel() {
   return (
-    <main className="flex-1 pt-6">
-      <div className="flex flex-col gap-2.5">
+    <main className="flex-1 pt-6 px-4">
+      <div className="flex flex-col gap-2.5 pb-6">
         {projects.map((project) => (
-          <div
-            key={project.alt}
-            className="relative w-full"
-            style={{ aspectRatio: "901 / 675.75" }}
-          >
+          <div key={project.alt} className="relative w-full aspect-video">
             <Image
               src={project.src}
               alt={project.alt}
