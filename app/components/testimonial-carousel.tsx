@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { LazyMotion, domAnimation, m, AnimatePresence } from "motion/react";
 import Image from "next/image";
 
 const testimonials = [
@@ -58,9 +58,10 @@ export function TestimonialCarousel() {
   const current = testimonials[index];
 
   return (
+    <LazyMotion features={domAnimation}>
     <div className="w-full overflow-hidden">
       <AnimatePresence mode="wait" custom={direction} initial={false}>
-        <motion.div
+        <m.div
           key={page}
           custom={direction}
           variants={variants}
@@ -150,8 +151,9 @@ export function TestimonialCarousel() {
               </span>
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </AnimatePresence>
     </div>
+    </LazyMotion>
   );
 }

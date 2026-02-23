@@ -36,7 +36,7 @@ function VideoPlayer({ item }: { item: VideoItem }) {
   };
 
   return (
-    <div className="relative w-full aspect-video bg-black overflow-hidden group">
+    <div className="relative w-full aspect-video bg-black overflow-hidden group rounded-xl">
       <video
         ref={videoRef}
         src={item.src}
@@ -51,16 +51,16 @@ function VideoPlayer({ item }: { item: VideoItem }) {
 
       {!playing && (
         <div
-          className="absolute inset-0 flex items-center justify-center cursor-pointer"
-          onClick={handlePlay}
+          className="absolute inset-0 flex items-center justify-center"
         >
           {/* Thumbnail via poster-like overlay using video's first frame */}
           <div className="absolute inset-0 bg-black/20" />
 
           {/* Play button */}
           <button
-            className="relative z-10 w-16 h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-[0px_8px_24px_rgba(0,0,0,0.24)] transition-transform duration-150 group-hover:scale-110 active:scale-95"
+            className="relative z-10 w-16 h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-[0px_8px_24px_rgba(0,0,0,0.24)] transition-transform duration-150 group-hover:scale-110 active:scale-95 cursor-pointer"
             aria-label={`Play ${item.alt}`}
+            onClick={handlePlay}
           >
             {/* Play icon — offset slightly right to optically center */}
             <svg
@@ -88,13 +88,13 @@ function VideoPlayer({ item }: { item: VideoItem }) {
 
 export function RightPanel() {
   return (
-    <main className="flex-1 pt-6 px-4">
-      <div className="flex flex-col gap-2.5 pb-6">
+    <main className="flex-1 pt-6 px-8 bg-white">
+      <div className="flex flex-col gap-4 pb-6">
         {items.map((item) =>
           item.type === "video" ? (
             <VideoPlayer key={item.alt} item={item} />
           ) : (
-            <div key={item.alt} className="relative w-full aspect-video">
+            <div key={item.alt} className="relative w-full aspect-video overflow-hidden rounded-xl">
               <Image
                 src={item.src}
                 alt={item.alt}
