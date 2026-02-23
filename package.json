@@ -13,7 +13,8 @@
     "motion": "^12.34.3",
     "next": "16.0.10",
     "react": "19.2.1",
-    "react-dom": "19.2.1"
+    "react-dom": "19.2.1",
+    "vidstack": "^0.6.15"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
