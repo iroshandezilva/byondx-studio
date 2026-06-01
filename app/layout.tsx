@@ -2,8 +2,23 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Coming Soon | Byondx Studio",
-  description: "Design-led studio building better SaaS, enterprise software, and MVPs. We turn business value into design that drives revenue. Launching Q1 2026.",
+  title: "Byondx | Design-led SaaS & Product Design Studio",
+  description: "Byondx is a design-led studio shaping SaaS and software products that look and work better. We turn business value into design that drives revenue.",
+  metadataBase: new URL("https://byondx.com"),
+  openGraph: {
+    type: "website",
+    title: "Byondx | Design-led SaaS & Product Design Studio",
+    description: "Byondx is a design-led studio shaping SaaS and software products that look and work better. We turn business value into design that drives revenue.",
+    url: "https://byondx.com",
+    siteName: "Byondx",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Byondx | Design-led SaaS & Product Design Studio",
+    description: "Byondx is a design-led studio shaping SaaS and software products that look and work better. We turn business value into design that drives revenue.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
@@ -14,12 +29,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,100..900&display=swap"
-          rel="stylesheet"
-        />
+        <link rel="preconnect" href="https://rsms.me/" />
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </head>
       <body className="font-sans antialiased">
         {children}
