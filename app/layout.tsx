@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { InterfaceKit } from "interface-kit/react";
 
@@ -36,6 +37,13 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === "development" && <InterfaceKit />}
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-4W4LY6XDXQ" strategy="afterInteractive" />
+        <Script id="gtag-init" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-4W4LY6XDXQ');
+        `}</Script>
       </body>
     </html>
   );
