@@ -1,6 +1,7 @@
 "use client"
 
-import { motion } from "motion/react"
+import { useRef, useState } from "react"
+import { AnimatePresence, motion } from "motion/react"
 import Image from "next/image"
 import { DiaTextReveal } from "@/components/ui/dia-text-reveal"
 import { TextAnimate } from "@/components/ui/text-animate"
@@ -63,16 +64,28 @@ const teamMembers: TeamMember[] = [
     role: "Product Designer",
     linkedin: "#",
     x: "#",
-    bg: "#def1b1",
+    bg: "transparent",
     photo: {
       src: "/avatars/minindu.png",
-      wrapClass: "absolute overflow-hidden h-[62.28px] right-[2.5px] top-[1.72px] w-[59.724px]",
-      imgClass: "absolute h-[357.07%] left-[-49.46%] max-w-none top-[-9.95%] w-[289.74%]",
+      wrapClass: "absolute inset-0",
+      imgClass: "size-full object-cover",
     },
   },
 ]
 
 export default function Home() {
+  const [hoveredAvatar, setHoveredAvatar] = useState<number | null>(null)
+  const prevAvatarRef = useRef<number | null>(null)
+
+  const handleHoverStart = (i: number) => {
+    prevAvatarRef.current = hoveredAvatar
+    setHoveredAvatar(i)
+  }
+  const handleHoverEnd = () => {
+    prevAvatarRef.current = hoveredAvatar
+    setHoveredAvatar(null)
+  }
+
   return (
     <div className="bg-white min-h-screen flex flex-col">
       {/* Navbar */}
@@ -86,64 +99,153 @@ export default function Home() {
           <Image src="/byondx-logo.svg" alt="Byondx" fill className="object-contain object-left" />
         </div>
         <div className="flex items-center gap-2">
-          <div className="bg-[rgba(255,255,255,0.18)] flex items-center justify-center rounded-full size-8 shrink-0">
-            <img src="/icons/figma.svg" alt="Figma" className="size-4" />
-          </div>
-          <a
+          <motion.a
+            href="/work"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[rgba(255,255,255,0.18)] flex items-center justify-center rounded-full size-8 shrink-0 overflow-hidden relative cursor-pointer"
+            initial="rest"
+            whileHover="hover"
+          >
+            <motion.img
+              src="/icons/figma.svg"
+              alt="Figma"
+              className="size-4 absolute"
+              variants={{
+                rest: { y: 0, filter: "blur(0px)", opacity: 1 },
+                hover: { y: -28, filter: "blur(6px)", opacity: 0 },
+              }}
+              transition={{ duration: 0.22, ease: [0.4, 0, 0.2, 1] }}
+            />
+            <motion.svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              className="size-4 absolute"
+              variants={{
+                rest: { y: 28, filter: "blur(6px)", opacity: 0 },
+                hover: { y: 0, filter: "blur(0px)", opacity: 1 },
+              }}
+              transition={{ duration: 0.22, ease: [0.4, 0, 0.2, 1] }}
+            >
+              <path d="M9.57648 2.53365C7.57781 1.29918 5 2.73688 5 5.08605V18.914C5 21.2632 7.57781 22.7009 9.57648 21.4664L20.7705 14.5524C22.6686 13.3801 22.6686 10.6199 20.7705 9.44763L9.57648 2.53365Z" fill="white"/>
+            </motion.svg>
+          </motion.a>
+          <motion.a
             href="https://cal.com/byondx-studio/intro"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-white flex items-center gap-1 px-[10px] py-[6px] rounded-full shadow-[0px_0px_0px_1px_rgba(0,0,0,0.05),0px_1px_1px_0px_rgba(0,0,0,0.08)]"
+            className="flex items-center gap-1 px-[10px] py-[6px] rounded-full shadow-[0px_0px_0px_1px_rgba(0,0,0,0.05),0px_1px_1px_0px_rgba(0,0,0,0.08)]"
+            initial="rest"
+            whileHover="hover"
+            whileTap={{ scale: 0.97 }}
+            variants={{
+              rest: { backgroundColor: "#ffffff" },
+              hover: { backgroundColor: "#f0f0f0" },
+            }}
+            transition={{ duration: 0.22, ease: [0.4, 0, 0.2, 1] }}
           >
-            <img src="/icons/calendar.svg" alt="" className="size-5" />
+            <div className="relative size-4 overflow-hidden shrink-0">
+              <motion.img
+                src="/icons/calendar.svg"
+                alt=""
+                className="size-4 absolute"
+                variants={{
+                  rest: { y: 0, filter: "blur(0px)", opacity: 1 },
+                  hover: { y: -20, filter: "blur(6px)", opacity: 0 },
+                }}
+                transition={{ duration: 0.22, ease: [0.4, 0, 0.2, 1] }}
+              />
+              <motion.svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                className="size-4 absolute"
+                variants={{
+                  rest: { y: 20, filter: "blur(6px)", opacity: 0 },
+                  hover: { y: 0, filter: "blur(0px)", opacity: 1 },
+                }}
+                transition={{ duration: 0.22, ease: [0.4, 0, 0.2, 1] }}
+              >
+                <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="#14141f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </motion.svg>
+            </div>
             <span className="text-[#14141f] text-sm font-medium tracking-[-0.32px] leading-5 whitespace-nowrap">
               Book a Intro
             </span>
-          </a>
+          </motion.a>
         </div>
       </motion.nav>
 
       {/* Main column */}
       <div className="flex-1 flex flex-col items-center">
         {/* Hero */}
-        <main className="flex flex-col items-center justify-center flex-1 w-full gap-8 px-4">
-          {/* Avatar row */}
-          <div className="flex items-center">
-            {teamMembers.map((member, i) => (
-              <motion.div
-                key={i}
-                initial={{ y: 20, filter: "blur(8px)", opacity: 0 }}
-                animate={{ y: 0, filter: "blur(0px)", opacity: 1 }}
-                transition={{ duration: 0.6, delay: 3.5 + i * 0.08, ease: [0.4, 0, 0.2, 1] }}
-                className={`relative group${i < teamMembers.length - 1 ? " -mr-[15px]" : ""} hover:z-10`}
-              >
-                {/* Tooltip */}
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200 whitespace-nowrap z-20">
-                  <div className="bg-white flex items-center gap-[6px] px-3 py-1 rounded-full shadow-[0px_2px_8px_rgba(0,0,0,0.12)]">
-                    <span className="text-black text-[14px] font-normal leading-4">{member.name}</span>
-                    <span className="text-[#8f8f8f] text-[14px] font-normal leading-4">{member.role}</span>
-                    <div className="bg-[#d9d9d9] h-3 w-px rounded-sm shrink-0" />
-                    <a href={member.linkedin} aria-label="LinkedIn">
-                      <img src="/icons/linkedin.svg" alt="" className="size-5" />
-                    </a>
-                    <a href={member.x} aria-label="X">
-                      <img src="/icons/x.svg" alt="" className="size-5" />
-                    </a>
-                  </div>
-                </div>
-
-                {/* Avatar */}
-                <div
-                  className="relative overflow-hidden rounded-full shadow-[1px_1px_2px_0px_rgba(0,0,0,0.06)] size-16 transition-transform duration-200 group-hover:-translate-y-[1.5px]"
-                  style={{ backgroundColor: member.bg }}
+        <main className="flex flex-col items-center justify-center flex-1 w-full gap-3 px-4">
+          {/* Avatar row + shared tooltip */}
+          <div className="relative inline-flex flex-col items-center">
+            <div className="flex items-center">
+              {teamMembers.map((member, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ y: 20, filter: "blur(8px)", opacity: 0 }}
+                  animate={{ y: 0, filter: "blur(0px)", opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 3.5 + i * 0.08, ease: [0.16, 1, 1, 1] }}
+                  className={`relative${i < teamMembers.length - 1 ? " -mr-[15px]" : ""}`}
                 >
-                  <div className={member.photo.wrapClass} style={member.photo.wrapStyle}>
-                    <img src={member.photo.src} alt={member.name} className={member.photo.imgClass} />
+                  <motion.div
+                    whileHover={{ y: -8, scale: 1.05 }}
+                    transition={{ duration: 0.3, ease: [0.16, 1, 1, 1] }}
+                    className="relative cursor-pointer"
+                    onHoverStart={() => handleHoverStart(i)}
+                    onHoverEnd={() => handleHoverEnd()}
+                  >
+                    <div
+                      className="relative overflow-hidden rounded-full shadow-[1px_1px_2px_0px_rgba(0,0,0,0.06)] size-12"
+                      style={{ backgroundColor: member.bg }}
+                    >
+                      <div className={member.photo.wrapClass} style={member.photo.wrapStyle}>
+                        <img src={member.photo.src} alt={member.name} className={member.photo.imgClass} />
+                      </div>
+                      <div className="absolute inset-0 rounded-full pointer-events-none shadow-[inset_0px_0px_0px_0.5px_rgba(0,0,0,0.04),inset_0px_0px_0px_2px_white]" />
+                    </div>
+                  </motion.div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Single shared tooltip below */}
+            <AnimatePresence>
+              {hoveredAvatar !== null && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.4, ease: [0.19, 1, 0.22, 1] }}
+                  className="absolute top-full mt-3 z-50 whitespace-nowrap"
+                >
+                  <div className="bg-[#1f1f1f] flex items-center px-3 py-2 rounded-full overflow-hidden">
+                    <AnimatePresence mode="popLayout" initial={false}>
+                      <motion.div
+                        key={hoveredAvatar}
+                        custom={prevAvatarRef.current !== null ? (hoveredAvatar > prevAvatarRef.current ? 1 : -1) : 1}
+                        initial={(dir) => ({ x: dir * 16, opacity: 0 })}
+                        animate={{ x: 0, opacity: 1 }}
+                        exit={(dir) => ({ x: dir * -16, opacity: 0 })}
+                        transition={{ duration: 0.22, ease: [0.19, 1, 0.22, 1] }}
+                        className="flex items-center gap-[6px]"
+                      >
+                        <span className="text-white text-[14px] font-normal leading-4">
+                          {teamMembers[hoveredAvatar].name}
+                        </span>
+                        <span className="text-white/40 text-[14px] font-normal leading-4">
+                          {teamMembers[hoveredAvatar].role}
+                        </span>
+                      </motion.div>
+                    </AnimatePresence>
                   </div>
-                  <div className="absolute inset-0 rounded-full pointer-events-none shadow-[inset_0px_0px_0px_0.5px_rgba(0,0,0,0.04),inset_0px_0px_0px_2px_white]" />
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Headline */}
@@ -170,14 +272,19 @@ export default function Home() {
         </main>
 
         {/* Footer */}
-        <footer className="flex items-center justify-center p-1 pb-4">
-          <div className="flex flex-col items-center gap-2 text-[13px] tracking-[-0.72px] text-center">
-            <HyperText className="text-black leading-normal text-[13px] tracking-[-0.72px]">
+        <motion.footer
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 4.4, ease: [0.4, 0, 0.2, 1] }}
+          className="flex items-center justify-center p-1 pb-4"
+        >
+          <div className="flex flex-col items-center gap-1 text-[13px] tracking-[-0.72px] text-center">
+            <HyperText animateOnHover={false} className="text-black leading-normal text-[13px] tracking-[-0.72px]">
               A fresh new site is on the way. We are heads-down on client work right now, so it lands in Q4 2026.
             </HyperText>
-            <p className="text-black/40 leading-normal">From the beautiful island of Sri Lanka 🇱🇰</p>
+            <p className="text-black leading-normal bg-[#f0f0f0]">From the beautiful island of Sri Lanka 🇱🇰</p>
           </div>
-        </footer>
+        </motion.footer>
       </div>
     </div>
   )

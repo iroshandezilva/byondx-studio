@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { InterfaceKit } from "interface-kit/react";
 
 export const metadata: Metadata = {
   title: "Byondx | Design-led SaaS & Product Design Studio",
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
     description: "Byondx is a design-led studio shaping SaaS and software products that look and work better. We turn business value into design that drives revenue.",
     url: "https://byondx.com",
     siteName: "Byondx",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    images: [{ url: "/og-image.png", width: 1920, height: 1280 }],
   },
   twitter: {
     card: "summary_large_image",
@@ -34,6 +35,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased">
         {children}
+        {process.env.NODE_ENV === "development" && <InterfaceKit />}
       </body>
     </html>
   );
