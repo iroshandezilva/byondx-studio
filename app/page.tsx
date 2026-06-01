@@ -228,9 +228,14 @@ export default function Home() {
                       <motion.div
                         key={hoveredAvatar}
                         custom={prevAvatarRef.current !== null ? (hoveredAvatar > prevAvatarRef.current ? 1 : -1) : 1}
-                        initial={(dir) => ({ x: dir * 16, opacity: 0 })}
-                        animate={{ x: 0, opacity: 1 }}
-                        exit={(dir) => ({ x: dir * -16, opacity: 0 })}
+                        variants={{
+                          enter: (dir: number) => ({ x: dir * 16, opacity: 0 }),
+                          center: { x: 0, opacity: 1 },
+                          exit: (dir: number) => ({ x: dir * -16, opacity: 0 }),
+                        }}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
                         transition={{ duration: 0.22, ease: [0.19, 1, 0.22, 1] }}
                         className="flex items-center gap-[6px]"
                       >
